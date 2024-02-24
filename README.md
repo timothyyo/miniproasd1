@@ -1,4 +1,8 @@
 # miniproasd1
+Nama:Joshua Timothy
+Nim:2309116070
+
+
 
 from  prettytable import PrettyTable
  
