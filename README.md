@@ -4,8 +4,8 @@ Nim:2309116070
 
 
 
-from  prettytable import PrettyTable
- 
+from prettytable import PrettyTable
+
 class Kendaraan:
     def __init__(self, id, merk, model, tahun, harga):
         self.id = id
@@ -28,9 +28,6 @@ class Dealer:
         else:
             print("Kendaraan dengan ID {} tidak ditemukan.".format(id))
 
-
-class Dealer:
-
     def tampilkan_katalog(self):
         if self.kendaraan_dict:
             table = PrettyTable(["ID", "Merk", "Model", "Tahun", "Harga"])
@@ -39,7 +36,6 @@ class Dealer:
             print(table)
         else:
             print("Katalog kendaraan kosong.")
-
 
     def cari_kendaraan(self, id):
         if id in self.kendaraan_dict:
@@ -57,48 +53,59 @@ class Dealer:
         else:
             print("Kendaraan dengan ID {} tidak ditemukan.".format(id))
 
-
     def create_kendaraan(self, id, merk, model, tahun, harga):
         kendaraan_baru = Kendaraan(id, merk, model, tahun, harga)
         self.tambah_kendaraan(kendaraan_baru)
         print("Kendaraan baru telah ditambahkan.")
 
-
     def read_katalog(self):
         self.tampilkan_katalog() 
-
 
     def update_kendaraan_by_id(self, id, merk, model, tahun, harga):
         kendaraan_baru = Kendaraan(id, merk, model, tahun, harga)
         self.update_kendaraan(id, kendaraan_baru)
 
-
     def delete_kendaraan(self, id):
         self.hapus_kendaraan(id)
-
-    
-  
-
 
 if __name__ == "__main__":
     dealer = Dealer()
 
-    dealer.create_kendaraan("001", "Toyota", "Avanza", 2020, 150000000)
-    dealer.create_kendaraan("002", "Honda", "Civic", 2019, 200000000)
+    while True:
+        print("\n=== MENU ===")
+        print("1. Tampilkan Katalog")
+        print("2. Tambah Kendaraan")
+        print("3. Cari Kendaraan")
+        print("4. Hapus Kendaraan")
+        print("5. Update Kendaraan")
+        print("6. Keluar")
 
-  
-    dealer.read_katalog()
+        choice = input("Pilih operasi yang ingin Anda lakukan: ")
 
-
-    dealer.cari_kendaraan("001")
-
-    dealer.delete_kendaraan("002")
-
-  
-    dealer.read_katalog()
-
-   
-    dealer.update_kendaraan_by_id("001", "Toyota", "Innova", 2021, 250000000)
-
-    
-    dealer.read_katalog()
+        if choice == "1":
+            dealer.read_katalog()
+        elif choice == "2":
+            id = input("Masukkan ID kendaraan: ")
+            merk = input("Masukkan merk kendaraan: ")
+            model = input("Masukkan model kendaraan: ")
+            tahun = int(input("Masukkan tahun kendaraan: "))
+            harga = int(input("Masukkan harga kendaraan: "))
+            dealer.create_kendaraan(id, merk, model, tahun, harga)
+        elif choice == "3":
+            id = input("Masukkan ID kendaraan yang ingin dicari: ")
+            dealer.cari_kendaraan(id)
+        elif choice == "4":
+            id = input("Masukkan ID kendaraan yang ingin dihapus: ")
+            dealer.delete_kendaraan(id)
+        elif choice == "5":
+            id = input("Masukkan ID kendaraan yang ingin diperbarui: ")
+            merk = input("Masukkan merk kendaraan baru: ")
+            model = input("Masukkan model kendaraan baru: ")
+            tahun = int(input("Masukkan tahun kendaraan baru: "))
+            harga = int(input("Masukkan harga kendaraan baru: "))
+            dealer.update_kendaraan_by_id(id, merk, model, tahun, harga)
+        elif choice == "6":
+            print("Terima kasih! Program selesai.")
+            break
+        else:
+            print("Pilihan tidak valid. Silakan pilih 1-6.")
